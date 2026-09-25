@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#050b14">
+<title>SafeGuard AI — by Rachit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="noise"></div><div class="orb orb-a"></div><div class="orb orb-b"></div>
+<div id="toast" class="toast"></div>
+
+<aside class="sidebar">
+  <div class="brand"><div class="logo">S</div><div><strong>SafeGuard <b>AI</b></strong><small>LLM SECURITY LAYER</small></div></div>
+  <div class="by">DESIGNED & BUILT BY <span>RACHIT</span></div>
+  <nav>
+    <button class="nav active" data-page="dashboard"><i>⌂</i> Overview</button>
+    <button class="nav" data-page="scanner"><i>⌁</i> Prompt Scanner</button>
+    <button class="nav" data-page="playground"><i>⚡</i> Attack Playground</button>
+    <button class="nav" data-page="grounding"><i>✓</i> Grounding Check</button>
+    <button class="nav" data-page="analytics"><i>◈</i> Analytics</button>
+  </nav>
+  <div class="side-bottom">
+    <div class="engine"><span></span><div><b>Engine Online</b><small>Browser security engine</small></div></div>
+    <small class="version">SAFEGUARD AI · V3.0</small>
+  </div>
+</aside>
+
+<main>
+<header class="top">
+  <div><div class="eyebrow">PS-07 · AI SAFETY / TRUST</div><h1>LLM Security <em>Command Center</em></h1><p>Detect adversarial prompts, explain risk and verify response grounding before an LLM takes action.</p></div>
+  <div class="top-right"><span class="online"><i></i> ENGINE ONLINE</span><div class="avatar">R</div></div>
+</header>
+
+<!-- OVERVIEW -->
+<section id="dashboard" class="page active">
+  <div class="hero">
+    <div class="hero-copy"><div class="tag">AI SECURITY & TRUST LAYER</div><h2>Protect every prompt<br>before it reaches the <em>model.</em></h2><p>SafeGuard analyzes prompt intent, detects common attack patterns and produces an explainable security decision.</p><button class="cta" id="heroScan">Start Security Scan <b>→</b></button></div>
+    <div class="shield-wrap"><div class="shield-glow"></div><div class="shield">S<span>✓</span></div><div class="shield-label">PROTECTED</div></div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><small>SESSION SCANS</small><strong id="mScans">0</strong><span>Prompts analyzed</span></div>
+    <div class="metric"><small>THREATS FOUND</small><strong id="mThreats">0</strong><span>Review + block</span></div>
+    <div class="metric"><small>SAFE RATE</small><strong id="mSafe">0%</strong><span>Allowed prompts</span></div>
+    <div class="metric"><small>AVG RISK</small><strong id="mRisk">0</strong><span>Out of 100</span></div>
+  </div>
+
+  <div class="overview-grid">
+    <div class="card">
+      <div class="card-head"><div><label>SECURITY PIPELINE</label><h3>Five-layer protection</h3></div><span class="live-badge">LIVE</span></div>
+      <div class="pipeline">
+        <div class="pnode"><b>01</b><span>INPUT</span></div><i>→</i><div class="pnode"><b>02</b><span>SANITIZE</span></div><i>→</i><div class="pnode"><b>03</b><span>DETECT</span></div><i>→</i><div class="pnode"><b>04</b><span>RISK</span></div><i>→</i><div class="pnode"><b>05</b><span>LLM GATE</span></div>
+      </div>
+      <div class="pipeline-status"><span></span> Security engine ready for analysis</div>
+    </div>
+    <div class="card recent">
+      <div class="card-head"><div><label>RECENT ACTIVITY</label><h3>Latest security events</h3></div><button class="link-btn" data-go="analytics">View all →</button></div>
+      <div id="recentActivity"><div class="empty-mini">No scans yet. Run your first security scan.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCANNER -->
+<section id="scanner" class="page">
+  <div class="section-title"><div class="eyebrow">SECURITY GATE / 01</div><h2>Prompt <em>Scanner</em></h2><p>Inspect a prompt before passing it to an LLM.</p></div>
+  <div class="scanner-grid">
+    <div class="card input-card">
+      <div class="card-head"><div><label>INPUT PROMPT</label><h3>Security inspection</h3></div><span class="counter" id="charCount">0 chars</span></div>
+      <textarea id="prompt" placeholder="Type or paste a prompt here..."></textarea>
+      <div class="quick"><button data-test="safe">✓ Safe prompt</button><button data-test="jailbreak">⚠ Jailbreak</button><button data-test="leak">⌁ Data leak</button><button data-test="injection">⌘ Injection</button></div>
+      <button class="cta full" id="scanBtn">Analyze Prompt <b>→</b></button>
+    </div>
+    <div class="card result-card">
+      <div class="card-head"><div><label>SECURITY DECISION</label><h3>Explainable verdict</h3></div><span class="live-badge">LIVE</span></div>
+      <div id="emptyResult" class="empty-result"><div class="radar">◈</div><b>Awaiting analysis</b><span>Run a scan to generate a security verdict.</span></div>
+      <div id="scanResult" class="hidden">
+        <div class="decision">
+          <div class="ring" id="riskRing"><div><strong id="score">0</strong><small>/100</small></div></div>
+          <div><strong id="verdict" class="verdict">ALLOW</strong><span id="riskText" class="risk-text">LOW RISK</span><p id="explain"></p></div>
+        </div>
+        <div id="chips" class="chips"></div>
+        <div id="findings" class="findings"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card response-card"><div class="card-head"><div><label>LLM GATE</label><h3>Final action</h3></div></div><div id="gateResponse" class="gate">Waiting for security analysis...</div></div>
+</section>
+
+<!-- PLAYGROUND -->
+<section id="playground" class="page">
+  <div class="section-title"><div class="eyebrow">RED TEAM / 02</div><h2>Attack <em>Playground</em></h2><p>Run predefined adversarial scenarios and demonstrate how SafeGuard responds.</p></div>
+  <div class="attack-grid">
+    <button class="attack" data-attack="jailbreak"><span class="attack-icon red">⚠</span><strong>Jailbreak</strong><small>Attempts to bypass model restrictions.</small><b>Run attack →</b></button>
+    <button class="attack" data-attack="injection"><span class="attack-icon orange">⌁</span><strong>Prompt Injection</strong><small>Attempts to override higher-priority instructions.</small><b>Run attack →</b></button>
+    <button class="attack" data-attack="extraction"><span class="attack-icon purple">◉</span><strong>System Prompt Leak</strong><small>Attempts to extract hidden instructions.</small><b>Run attack →</b></button>
+    <button class="attack" data-attack="exfiltration"><span class="attack-icon pink">◇</span><strong>Data Exfiltration</strong><small>Attempts to expose protected credentials.</small><b>Run attack →</b></button>
+    <button class="attack" data-attack="role"><span class="attack-icon blue">◎</span><strong>Role Hijacking</strong><small>Attempts to manipulate the assistant's role.</small><b>Run attack →</b></button>
+    <button class="attack safe-attack" data-attack="safe"><span class="attack-icon green">✓</span><strong>Safe Prompt</strong><small>A normal request used as a control case.</small><b>Run test →</b></button>
+  </div>
+  <div class="card playground-result"><label>PLAYGROUND OUTPUT</label><div id="playOutput"><div class="empty-mini">Select an attack scenario above to run the security engine.</div></div></div>
+</section>
+
+<!-- GROUNDING -->
+<section id="grounding" class="page">
+  <div class="section-title"><div class="eyebrow">FACTUALITY / 03</div><h2>Grounding <em>Check</em></h2><p>Compare a generated response against trusted context.</p></div>
+  <div class="card">
+    <div class="two-col">
+      <div><label>TRUSTED CONTEXT</label><textarea id="source" placeholder="Paste documentation, source text or knowledge-base content..."></textarea><small>Reference material used for the grounding comparison.</small></div>
+      <div><label>GENERATED RESPONSE</label><textarea id="response" placeholder="Paste the model-generated response..."></textarea><small>Unsupported concepts increase estimated hallucination risk.</small></div>
+    </div>
+    <div class="ground-actions"><button class="secondary" id="groundDemo">Use Demo Data</button><button class="cta compact" id="groundBtn">Analyze Grounding <b>→</b></button></div>
+    <div id="groundResult" class="ground-result hidden"></div>
+  </div>
+</section>
+
+<!-- ANALYTICS -->
+<section id="analytics" class="page">
+  <div class="section-title"><div class="eyebrow">SESSION INTELLIGENCE / 04</div><h2>Security <em>Analytics</em></h2><p>Live metrics generated from this browser session.</p></div>
+  <div class="metrics four"><div class="metric"><small>PROMPTS SCANNED</small><strong id="aScans">0</strong><span>Total analyses</span></div><div class="metric red-m"><small>THREATS</small><strong id="aThreats">0</strong><span>Review + block</span></div><div class="metric blue-m"><small>AVG RISK</small><strong id="aRisk">0</strong><span>Risk score</span></div><div class="metric green-m"><small>SAFE RATE</small><strong id="aSafe">0%</strong><span>Allowed</span></div></div>
+  <div class="analytics-grid">
+    <div class="card"><div class="card-head"><div><label>DECISION DISTRIBUTION</label><h3>Session overview</h3></div></div><div class="bars"><div><label>ALLOW <b id="allowPct">0%</b></label><span><i id="allowFill"></i></span></div><div><label>REVIEW <b id="reviewPct">0%</b></label><span><i id="reviewFill"></i></span></div><div><label>BLOCK <b id="blockPct">0%</b></label><span><i id="blockFill"></i></span></div></div></div>
+    <div class="card"><div class="card-head"><div><label>EVENT LOG</label><h3>Security activity</h3></div><button class="link-btn" id="clear">Clear</button></div><div id="activity"><div class="empty-mini">No activity yet.</div></div></div>
+  </div>
+</section>
+
+<footer>SafeGuard AI · PS-07 AI Safety Prototype · <b>by Rachit</b></footer>
+</main>
+<script src="./script.js"></script>
+</body></html>
